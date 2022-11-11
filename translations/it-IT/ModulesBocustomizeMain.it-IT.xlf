@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin528l3nsyb" source-language="it-IT" target-language="it-IT" datatype="plaintext">
+    <body>
+      <trans-unit id="45692782ed326dffa84ba50643149bb2">
+        <source>BackOffice customize</source>
+        <target>BackOffice customize</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="86f8cdb69a0c1d4a2a7961fe96559126">
+        <source>This module helps you to customize BackOffice</source>
+        <target>This module helps you to customize BackOffice</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e316b4398212d473f7f53c7728fe1c37">
+        <source>Settings updated succesfully</source>
+        <target>Impostazioni aggiornate con successo</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="003b06dcfe67596f17e3de26e6a436c8">
+        <source>Error occurred during settings update</source>
+        <target>È avvenuto un errore durante l'aggiornamento delle impostazioni</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="f4f70727dc34561dfde1a3c529b6205c">
+        <source>Login Settings</source>
+        <target>Impostazioni Login</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="d91f2eea3f7396346614c62eac89544a">
+        <source>Use custom logo</source>
+        <target>Utilizza logo personalizzato</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="00d23a76e43b46dae9ec7aa9dcbebb32">
+        <source>Enabled</source>
+        <target>Abilitato</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="b9f5c797ebbf55adccdd8539a65a0241">
+        <source>Disabled</source>
+        <target>Disabilitato</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="4638eff043c92c0d3a990576b9848792">
+        <source>Custom logo</source>
+        <target>Logo personalizzato</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="bb8f58bbd27e00bb41b740016b12380a">
+        <source>Custom logo CSS</source>
+        <target>Logo personalizzato CSS</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="132b00dc8079ef2ca49e06299b746234">
+        <source>Footer social icons</source>
+        <target>Footer icone social</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="4c0dbcd30c0f22ed8a5cd44de366597e">
+        <source>Title text</source>
+        <target>Testo titolo</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="70521577662f396074e3a936ab065741">
+        <source>Copyright text</source>
+        <target>Testo copyright</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c9cc8cce247e49bae79f15173ce97354">
+        <source>Save</source>
+        <target>Salva</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

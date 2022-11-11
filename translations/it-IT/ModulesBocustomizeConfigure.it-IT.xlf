@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin528l3nsyb" source-language="it-IT" target-language="it-IT" datatype="plaintext">
+    <body>
+      <trans-unit id="45692782ed326dffa84ba50643149bb2">
+        <source>BackOffice customize</source>
+        <target>BackOffice customize</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="bc28bab1cbeef80a929d0d881eac5011">
+        <source>BackOffice Customizer</source>
+        <target>BackOffice Customizer</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="4a910f99075f7192b0dc53b03e21f014">
+        <source>With this module you can customize BackOffice with your own logo and branding colors</source>
+        <target>Con questo modulo è possibile modificare il BackOffice con il proprio logo e i colori del brand</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="5b6cf869265c13af8566f192b4ab3d2a">
+        <source>Documentation</source>
+        <target>Documentazione</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="dfc94e8224bbd24aa039a3c79fbb9d4e">
+        <source>You can get a PDF documentation to configure this module</source>
+        <target>Puoi scaricare la documentazione per configurare questo modulo</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="78463a384a5aa4fad5fa73e2f506ecfc">
+        <source>English</source>
+        <target>Inglese</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="4be8e06d27bca7e1828f2fa9a49ca985">
+        <source>Italian</source>
+        <target>Italiano</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
