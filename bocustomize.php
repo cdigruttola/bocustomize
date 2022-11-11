@@ -70,7 +70,7 @@ class Bocustomize extends Module
         Configuration::updateValue(self::BOCUSTOMIZE_TITLE_TEXT, Configuration::get('PS_SHOP_NAME'));
         Configuration::updateValue(self::BOCUSTOMIZE_COPYRIGHT_TEXT, '&copy; PrestaShop&#8482; 2007-' . date('Y') . ' - All rights reserved');
         return parent::install() &&
-            $this->registerHook('backOfficeHeader') &&
+            $this->registerHook('displayBackOfficeHeader') &&
             $this->registerHook('actionAdminLoginControllerSetMedia') &&
             $this->importConfiguration();
     }
@@ -152,12 +152,12 @@ class Bocustomize extends Module
                             [
                                 'id' => 'active_on',
                                 'value' => true,
-                                'label' => $this->trans('Enabled', [], 'Modules.Bocustomize.Main')
+                                'label' => $this->trans('Enabled', [], 'Modules.Bocustomize.Main'),
                             ],
                             [
                                 'id' => 'active_off',
                                 'value' => false,
-                                'label' => $this->trans('Disabled', [], 'Modules.Bocustomize.Main')
+                                'label' => $this->trans('Disabled', [], 'Modules.Bocustomize.Main'),
                             ]
                         ],
                     ],
@@ -183,12 +183,12 @@ class Bocustomize extends Module
                             [
                                 'id' => 'active_on',
                                 'value' => true,
-                                'label' => $this->trans('Enabled', [], 'Modules.Bocustomize.Main')
+                                'label' => $this->trans('Enabled', [], 'Modules.Bocustomize.Main'),
                             ],
                             [
                                 'id' => 'active_off',
                                 'value' => false,
-                                'label' => $this->trans('Disabled', [], 'Modules.Bocustomize.Main')
+                                'label' => $this->trans('Disabled', [], 'Modules.Bocustomize.Main'),
                             ]
                         ],
                     ],
@@ -249,7 +249,7 @@ class Bocustomize extends Module
         return $res;
     }
 
-    public function hookBackOfficeHeader()
+    public function hookDisplayBackOfficeHeader()
     {
         if ($this->active) {
             //$this->context->controller->addCSS($this->_path . 'views/css/back.css');
