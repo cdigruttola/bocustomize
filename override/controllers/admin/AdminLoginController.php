@@ -43,5 +43,4 @@ class AdminLoginController extends AdminLoginControllerCore
         return $this->context->smarty->createTemplate(_PS_MODULE_DIR_ . 'bocustomize/views/templates/admin/login/content.tpl', $this->context->smarty);
     }
 
-
 }
