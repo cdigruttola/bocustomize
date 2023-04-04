@@ -38,6 +38,7 @@ class Bocustomize extends Module
     const BOCUSTOMIZE_SOCIAL_ICONS = 'BOCUSTOMIZE_SOCIAL_ICONS';
     const BOCUSTOMIZE_TITLE_TEXT = 'BOCUSTOMIZE_TITLE_TEXT';
     const BOCUSTOMIZE_COPYRIGHT_TEXT = 'BOCUSTOMIZE_COPYRIGHT_TEXT';
+    const BOCUSTOMIZE_FILL_IMAGE_COLOR = 'BOCUSTOMIZE_FILL_IMAGE_COLOR';
 
     private string $configurationSource;
     private array $fields;
@@ -69,6 +70,7 @@ class Bocustomize extends Module
     {
         Configuration::updateValue(self::BOCUSTOMIZE_TITLE_TEXT, Configuration::get('PS_SHOP_NAME'));
         Configuration::updateValue(self::BOCUSTOMIZE_COPYRIGHT_TEXT, '&copy; PrestaShop&#8482; 2007-' . date('Y') . ' - All rights reserved');
+        Configuration::updateValue(self::BOCUSTOMIZE_FILL_IMAGE_COLOR, '#FFF');
         return parent::install() &&
             $this->registerHook('displayBackOfficeHeader') &&
             $this->registerHook('actionAdminLoginControllerSetMedia') &&
@@ -204,6 +206,11 @@ class Bocustomize extends Module
                         'label' => $this->trans('Copyright text', [], 'Modules.Bocustomize.Main'),
                         'name' => self::BOCUSTOMIZE_COPYRIGHT_TEXT,
                     ],
+                    [
+                        'type' => 'color',
+                        'label' => $this->trans('Color used in ImageManager::resize to fill image', [], 'Modules.Bocustomize.Main'),
+                        'name' => self::BOCUSTOMIZE_FILL_IMAGE_COLOR,
+                    ],
                 ],
                 'submit' => [
                     'title' => $this->trans('Save', [], 'Modules.Bocustomize.Main'),
@@ -220,6 +227,7 @@ class Bocustomize extends Module
             self::BOCUSTOMIZE_SOCIAL_ICONS => Configuration::get(self::BOCUSTOMIZE_SOCIAL_ICONS),
             self::BOCUSTOMIZE_TITLE_TEXT => Configuration::get(self::BOCUSTOMIZE_TITLE_TEXT),
             self::BOCUSTOMIZE_COPYRIGHT_TEXT => Configuration::get(self::BOCUSTOMIZE_COPYRIGHT_TEXT),
+            self::BOCUSTOMIZE_FILL_IMAGE_COLOR => Configuration::get(self::BOCUSTOMIZE_FILL_IMAGE_COLOR),
         ];
     }
 

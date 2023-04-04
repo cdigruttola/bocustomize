@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file original="admin528l3nsyb" source-language="it-IT" target-language="it-IT" datatype="plaintext">
+  <file original="admin035xdgcoc" source-language="it-IT" target-language="it-IT" datatype="plaintext">
     <body>
       <trans-unit id="45692782ed326dffa84ba50643149bb2">
         <source>BackOffice customize</source>
@@ -22,7 +22,7 @@
         <target>È avvenuto un errore durante l'aggiornamento delle impostazioni</target>
         <note>Line: </note>
       </trans-unit>
-      <trans-unit id="f4f70727dc34561dfde1a3c529b6205c">
+      <trans-unit id="4fd320520011afe4257e2e61e856a01e">
         <source>Login Settings</source>
         <target>Impostazioni Login</target>
         <note>Line: </note>
@@ -70,6 +70,11 @@
       <trans-unit id="c9cc8cce247e49bae79f15173ce97354">
         <source>Save</source>
         <target>Salva</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="9b9081b091855de06bab2809d8890a11">
+        <source>Color used in ImageManager::resize to fill image</source>
+        <target>Colore utilizzato in ImageManager::resize per il riempimento delle immagini</target>
         <note>Line: </note>
       </trans-unit>
     </body>
