@@ -269,6 +269,7 @@ class Bocustomize extends Module
         if ($this->active && Configuration::get(self::BOCUSTOMIZE_CUSTOM_LOGO)) {
             $params['controller']->addCSS($this->_path . 'views/css/custom_logo.css');
         }
+        $params['controller']->addJs($this->_path . 'views/js/admin/login.js');
     }
 
     /**
