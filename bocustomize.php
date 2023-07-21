@@ -47,7 +47,7 @@ class Bocustomize extends Module
     {
         $this->name = 'bocustomize';
         $this->tab = 'administration';
-        $this->version = '1.0.0';
+        $this->version = '1.0.1';
         $this->author = 'cdigruttola';
         $this->need_instance = 0;
         $this->bootstrap = true;
