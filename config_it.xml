@@ -2,7 +2,7 @@
 <module>
     <name>bocustomize</name>
     <displayName><![CDATA[BackOffice customize]]></displayName>
-    <version><![CDATA[1.0.1]]></version>
+    <version><![CDATA[1.1.0]]></version>
     <description><![CDATA[This module helps you to customize BackOffice]]></description>
     <author><![CDATA[cdigruttola]]></author>
     <tab><![CDATA[administration]]></tab>
