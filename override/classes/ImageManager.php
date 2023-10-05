@@ -22,12 +22,10 @@
  * @copyright Copyright since 2007 Carmine Di Gruttola
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
-
 class ImageManager extends ImageManagerCore
 {
-
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function resize(
         $sourceFile,
@@ -185,7 +183,7 @@ class ImageManager extends ImageManagerCore
 
     private static function hex2rgb($hex): array
     {
-        $hex = str_replace("#", "", $hex);
+        $hex = str_replace('#', '', $hex);
 
         if (strlen($hex) == 3) {
             $r = hexdec(substr($hex, 0, 1) . substr($hex, 0, 1));
@@ -196,6 +194,7 @@ class ImageManager extends ImageManagerCore
             $g = hexdec(substr($hex, 2, 2));
             $b = hexdec(substr($hex, 4, 2));
         }
+
         return ['red' => $r, 'green' => $g, 'blue' => $b];
     }
 }

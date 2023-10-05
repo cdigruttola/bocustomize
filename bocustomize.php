@@ -71,10 +71,11 @@ class Bocustomize extends Module
         Configuration::updateValue(self::BOCUSTOMIZE_TITLE_TEXT, Configuration::get('PS_SHOP_NAME'));
         Configuration::updateValue(self::BOCUSTOMIZE_COPYRIGHT_TEXT, '&copy; PrestaShop&#8482; 2007-' . date('Y') . ' - All rights reserved');
         Configuration::updateValue(self::BOCUSTOMIZE_FILL_IMAGE_COLOR, '#FFF');
-        return parent::install() &&
-            $this->registerHook('displayBackOfficeHeader') &&
-            $this->registerHook('actionAdminLoginControllerSetMedia') &&
-            $this->importConfiguration();
+
+        return parent::install()
+            && $this->registerHook('displayBackOfficeHeader')
+            && $this->registerHook('actionAdminLoginControllerSetMedia')
+            && $this->importConfiguration();
     }
 
     protected function importConfiguration()
@@ -82,6 +83,7 @@ class Bocustomize extends Module
         if (Tools::file_exists_no_cache($this->configurationSource)) {
             $configurationJson = Tools::file_get_contents($this->configurationSource);
             $this->fields = json_decode($configurationJson, true);
+
             return true;
         } else {
             return false;
@@ -94,6 +96,7 @@ class Bocustomize extends Module
         if (@file_put_contents($this->configurationSource, $configurationJson)) {
             return true;
         }
+
         return false;
     }
 
@@ -105,7 +108,7 @@ class Bocustomize extends Module
     public function getContent()
     {
         $output = '';
-        if ((Tools::isSubmit('submitBocustomizeLoginModule'))) {
+        if (Tools::isSubmit('submitBocustomizeLoginModule')) {
             if ($this->postProcessLogin()) {
                 $output .= $this->displayConfirmation($this->trans('Settings updated succesfully', [], 'Modules.Bocustomize.Main'));
             } else {
@@ -138,6 +141,7 @@ class Bocustomize extends Module
     {
         $ext = Configuration::get(self::BOCUSTOMIZE_CUSTOM_LOGO_FILE_EXT);
         $image_url = _PS_MODULE_DIR_ . $this->name . '/views/img/admin_logo.' . $ext;
+
         return [
             'form' => [
                 'legend' => [
@@ -160,7 +164,7 @@ class Bocustomize extends Module
                                 'id' => 'active_off',
                                 'value' => false,
                                 'label' => $this->trans('Disabled', [], 'Modules.Bocustomize.Main'),
-                            ]
+                            ],
                         ],
                     ],
                     [
@@ -191,7 +195,7 @@ class Bocustomize extends Module
                                 'id' => 'active_off',
                                 'value' => false,
                                 'label' => $this->trans('Disabled', [], 'Modules.Bocustomize.Main'),
-                            ]
+                            ],
                         ],
                     ],
                     [
@@ -250,7 +254,7 @@ class Bocustomize extends Module
                 Configuration::updateValue(self::BOCUSTOMIZE_CUSTOM_LOGO_FILE_EXT, $ext);
                 $res &= true;
             }
-        } else if (!file_exists(_PS_MODULE_DIR_ . $this->name . '/views/img/admin_logo.' . Configuration::get(self::BOCUSTOMIZE_CUSTOM_LOGO_FILE_EXT))) {
+        } elseif (!file_exists(_PS_MODULE_DIR_ . $this->name . '/views/img/admin_logo.' . Configuration::get(self::BOCUSTOMIZE_CUSTOM_LOGO_FILE_EXT))) {
             $res &= false;
         }
 
@@ -260,7 +264,7 @@ class Bocustomize extends Module
     public function hookDisplayBackOfficeHeader()
     {
         if ($this->active) {
-            //$this->context->controller->addCSS($this->_path . 'views/css/back.css');
+            // $this->context->controller->addCSS($this->_path . 'views/css/back.css');
         }
     }
 
@@ -289,6 +293,7 @@ class Bocustomize extends Module
         $helper->currentIndex = $this->context->link->getAdminLink('AdminModules', false)
             . '&configure=' . $this->name . '&tab_module=' . $this->tab . '&module_name=' . $this->name;
         $helper->token = Tools::getAdminTokenLite('AdminModules');
+
         return $helper;
     }
 
@@ -297,7 +302,8 @@ class Bocustomize extends Module
      *
      * @param string $hex_color Supported formats: `#FFF`, `#FFFFFF`, `FFF`, `FFFFFF`
      * @param float $percent A number between -1 and 1. E.g. 0.3 = 30% lighter; -0.4 = 40% darker.
-     * @return  string
+     *
+     * @return string
      */
     private function luminance($hex_color, $percent): string
     {
@@ -314,5 +320,4 @@ class Bocustomize extends Module
 
         return '#' . implode($hex_color);
     }
-
 }
