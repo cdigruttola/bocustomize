@@ -34,7 +34,7 @@ class ImageManager extends ImageManagerCore
         $destinationFile,
         $destinationWidth = null,
         $destinationHeight = null,
-        $fileType = 'jpg',
+        $destinationFileType = 'jpg',
         $forceType = false,
         &$error = 0,
         &$targetWidth = null,
@@ -42,17 +42,19 @@ class ImageManager extends ImageManagerCore
         $quality = 5,
         &$sourceWidth = null,
         &$sourceHeight = null
-    )
-    {
+    ) {
         clearstatcache(true, $sourceFile);
 
+        // Check if original file exists
         if (!file_exists($sourceFile) || !filesize($sourceFile)) {
-            return !($error = self::ERROR_FILE_NOT_EXIST);
+            $error = self::ERROR_FILE_NOT_EXIST;
+
+            return false;
         }
 
-        list($tmpWidth, $tmpHeight, $type) = getimagesize($sourceFile);
+        list($tmpWidth, $tmpHeight, $sourceFileType) = getimagesize($sourceFile);
         $rotate = 0;
-        if (function_exists('exif_read_data') && function_exists('mb_strtolower')) {
+        if (function_exists('exif_read_data')) {
             $exif = @exif_read_data($sourceFile);
 
             if ($exif && isset($exif['Orientation'])) {
@@ -91,16 +93,24 @@ class ImageManager extends ImageManagerCore
             $sourceHeight = $tmpHeight;
         }
 
-        // If PS_IMAGE_QUALITY is activated, the generated image will be a PNG with .jpg as a file extension.
-        // This allow for higher quality and for transparency. JPG source files will also benefit from a higher quality
-        // because JPG reencoding by GD, even with max quality setting, degrades the image.
-        if (Configuration::get('PS_IMAGE_QUALITY') == 'png_all'
-            || (Configuration::get('PS_IMAGE_QUALITY') == 'png' && $type == IMAGETYPE_PNG) && !$forceType) {
-            $fileType = 'png';
+        // If the filetype is not forced and we are requesting a JPG file, we must
+        // adjust the format inside according to PS_IMAGE_QUALITY in some cases.
+        if (!$forceType && $destinationFileType === 'jpg') {
+            if (Configuration::get('PS_IMAGE_QUALITY') == 'png_all'
+                || (Configuration::get('PS_IMAGE_QUALITY') == 'png' && $sourceFileType == IMAGETYPE_PNG)) {
+                $destinationFileType = 'png';
+            }
+
+            if (Configuration::get('PS_IMAGE_QUALITY') == 'webp_all'
+                || (Configuration::get('PS_IMAGE_QUALITY') == 'webp' && $sourceFileType == IMAGETYPE_WEBP)) {
+                $destinationFileType = 'webp';
+            }
         }
 
         if (!$sourceWidth) {
-            return !($error = self::ERROR_FILE_WIDTH);
+            $error = self::ERROR_FILE_WIDTH;
+
+            return false;
         }
         if (!$destinationWidth) {
             $destinationWidth = $sourceWidth;
@@ -120,27 +130,27 @@ class ImageManager extends ImageManagerCore
             if ($psImageGenerationMethod == 2 || (!$psImageGenerationMethod && $widthDiff > $heightDiff)) {
                 $nextHeight = $destinationHeight;
                 $nextWidth = round(($sourceWidth * $nextHeight) / $sourceHeight);
-                $destinationWidth = (int)(!$psImageGenerationMethod ? $destinationWidth : $nextWidth);
+                $destinationWidth = (int) (!$psImageGenerationMethod ? $destinationWidth : $nextWidth);
             } else {
                 $nextWidth = $destinationWidth;
                 $nextHeight = round($sourceHeight * $destinationWidth / $sourceWidth);
-                $destinationHeight = (int)(!$psImageGenerationMethod ? $destinationHeight : $nextHeight);
+                $destinationHeight = (int) (!$psImageGenerationMethod ? $destinationHeight : $nextHeight);
             }
         }
 
         if (!ImageManager::checkImageMemoryLimit($sourceFile)) {
-            return !($error = self::ERROR_MEMORY_LIMIT);
+            $error = self::ERROR_MEMORY_LIMIT;
+
+            return false;
         }
 
         $targetWidth = $destinationWidth;
         $targetHeight = $destinationHeight;
 
         $destImage = imagecreatetruecolor($destinationWidth, $destinationHeight);
-
         $color = self::hex2rgb(Configuration::get(Bocustomize::BOCUSTOMIZE_FILL_IMAGE_COLOR));
-
-        // If image is a PNG and the output is PNG, fill with transparency. Else fill with white background.
-        if ($fileType == 'png' && $type == IMAGETYPE_PNG) {
+        // If the output is PNG, fill with transparency. Else fill with white background.
+        if ($destinationFileType == 'png' || $destinationFileType == 'webp' || $destinationFileType == 'avif') {
             imagealphablending($destImage, false);
             imagesavealpha($destImage, true);
             $transparent = imagecolorallocatealpha($destImage, $color['red'], $color['green'], $color['blue'], 127);
@@ -150,23 +160,24 @@ class ImageManager extends ImageManagerCore
             imagefilledrectangle($destImage, 0, 0, $destinationWidth, $destinationHeight, $white);
         }
 
-        $srcImage = ImageManager::create($type, $sourceFile);
+        $srcImage = ImageManager::create($sourceFileType, $sourceFile);
         if ($rotate) {
+            /** @phpstan-ignore-next-line */
             $srcImage = imagerotate($srcImage, $rotate, 0);
         }
 
         if ($destinationWidth >= $sourceWidth && $destinationHeight >= $sourceHeight) {
-            imagecopyresized($destImage, $srcImage, (int)(($destinationWidth - $nextWidth) / 2), (int)(($destinationHeight - $nextHeight) / 2), 0, 0, $nextWidth, $nextHeight, $sourceWidth, $sourceHeight);
+            imagecopyresized($destImage, $srcImage, (int) (($destinationWidth - $nextWidth) / 2), (int) (($destinationHeight - $nextHeight) / 2), 0, 0, $nextWidth, $nextHeight, $sourceWidth, $sourceHeight);
         } else {
-            ImageManager::imagecopyresampled($destImage, $srcImage, (int)(($destinationWidth - $nextWidth) / 2), (int)(($destinationHeight - $nextHeight) / 2), 0, 0, $nextWidth, $nextHeight, $sourceWidth, $sourceHeight, $quality);
+            ImageManager::imagecopyresampled($destImage, $srcImage, (int) (($destinationWidth - $nextWidth) / 2), (int) (($destinationHeight - $nextHeight) / 2), 0, 0, $nextWidth, $nextHeight, $sourceWidth, $sourceHeight, $quality);
         }
-        $writeFile = ImageManager::write($fileType, $destImage, $destinationFile);
-        Hook::exec('actionOnImageResizeAfter', ['dst_file' => $destinationFile, 'file_type' => $fileType]);
+        $writeFile = ImageManager::write($destinationFileType, $destImage, $destinationFile);
+        Hook::exec('actionOnImageResizeAfter', ['dst_file' => $destinationFile, 'file_type' => $destinationFileType]);
         @imagedestroy($srcImage);
 
         file_put_contents(
             dirname($destinationFile) . DIRECTORY_SEPARATOR . 'fileType',
-            $fileType
+            $destinationFileType
         );
 
         return $writeFile;
