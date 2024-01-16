@@ -26,6 +26,8 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
+require_once _PS_MODULE_DIR_ . '/bocustomize/vendor/autoload.php';
+
 class ImageManager extends ImageManagerCore
 {
     /**
