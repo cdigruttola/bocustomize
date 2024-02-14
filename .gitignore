@@ -45,3 +45,4 @@ upload/
 **/node_modules/
 tmp
 config_*.xml
+views/img/admin_logo.*
