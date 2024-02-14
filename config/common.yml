@@ -1,0 +1,10 @@
+services:
+  _defaults:
+    public: true
+
+  cdigruttola.bocustomize.module:
+    class: Bocustomize
+    factory: [ 'Module', 'getInstanceByName' ]
+    public: false
+    arguments:
+      - 'bocustomize'

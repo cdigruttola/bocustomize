@@ -12,7 +12,7 @@
   },
   "autoload": {
     "psr-4": {
-      "cdigruttola\\Module\\Bocustomize\\": "src/"
+      "cdigruttola\\Bocustomize\\": "src/"
     },
     "classmap": [
       "bocustomize.php"

@@ -28,3 +28,7 @@
 #header_infos #header_logo {
     background: url(../img/header_logo.png) no-repeat center left;
 }
+
+#form_custom_logo_file_preview + img {
+    width: 20%;
+}

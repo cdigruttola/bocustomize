@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'cdigruttola\\Module\\Bocustomize\\' => array($baseDir . '/src'),
+    'cdigruttola\\Bocustomize\\' => array($baseDir . '/src'),
 );

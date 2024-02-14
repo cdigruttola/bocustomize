@@ -1,0 +1,11 @@
+bocustomize_controller:
+    path: /bocustomize/configuration
+    methods: [GET]
+    defaults:
+        _controller: 'cdigruttola\Bocustomize\Controller\BoCustomizeController::index'
+
+bocustomize_controller_configuration_save:
+  path: /bocustomize/configuration
+  methods: [POST, PATCH]
+  defaults:
+    _controller: 'cdigruttola\Bocustomize\Controller\BoCustomizeController::saveConfiguration'

@@ -1,3 +1,8 @@
+#shop-img {
+    display: flex;
+justify-content: center;
+}
+
 #shop-img img {
-    width: 130px;
+    width: 100px;
 }

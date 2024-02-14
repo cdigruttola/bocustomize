@@ -8,4 +8,8 @@ $baseDir = dirname($vendorDir);
 return array(
     'Bocustomize' => $baseDir . '/bocustomize.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'cdigruttola\\Bocustomize\\Controller\\BoCustomizeController' => $baseDir . '/src/Controller/BoCustomizeController.php',
+    'cdigruttola\\Bocustomize\\Form\\BoCustomizeConfigurationType' => $baseDir . '/src/Form/BoCustomizeConfigurationType.php',
+    'cdigruttola\\Bocustomize\\Form\\DataConfiguration\\BoCustomizeConfigurationData' => $baseDir . '/src/Form/DataConfiguration/BoCustomizeConfigurationData.php',
+    'cdigruttola\\Bocustomize\\Form\\Provider\\BoCustomizerConfigurationFormDataProvider' => $baseDir . '/src/Form/Provider/BoCustomizerConfigurationFormDataProvider.php',
 );

@@ -22,6 +22,9 @@
  * @copyright Copyright since 2007 Carmine Di Gruttola
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
+
+use cdigruttola\Bocustomize\Form\DataConfiguration\BoCustomizeConfigurationData;
+
 if (!defined('_PS_VERSION_')) {
     exit;
 }
@@ -34,12 +37,12 @@ class AdminLoginController extends AdminLoginControllerCore
     {
         parent::initContent();
         $this->context->smarty->assign([
-            'shop_name' => Tools::safeOutput(Configuration::get(Bocustomize::BOCUSTOMIZE_TITLE_TEXT)),
-            'copyright' => Configuration::get(Bocustomize::BOCUSTOMIZE_COPYRIGHT_TEXT),
-            'custom_logo' => Configuration::get(Bocustomize::BOCUSTOMIZE_CUSTOM_LOGO),
-            'ext' => Configuration::get(Bocustomize::BOCUSTOMIZE_CUSTOM_LOGO_FILE_EXT),
+            'shop_name' => Tools::safeOutput(Configuration::get(BoCustomizeConfigurationData::BOCUSTOMIZE_TITLE_TEXT)),
+            'copyright' => Configuration::get(BoCustomizeConfigurationData::BOCUSTOMIZE_COPYRIGHT_TEXT),
+            'custom_logo' => Configuration::get(BoCustomizeConfigurationData::BOCUSTOMIZE_CUSTOM_LOGO),
+            'ext' => Configuration::get(BoCustomizeConfigurationData::BOCUSTOMIZE_CUSTOM_LOGO_FILE_EXT),
             'module_dir' => __PS_BASE_URI__ . 'modules/bocustomize/',
-            'social_icons' => Configuration::get(Bocustomize::BOCUSTOMIZE_SOCIAL_ICONS),
+            'social_icons' => Configuration::get(BoCustomizeConfigurationData::BOCUSTOMIZE_SOCIAL_ICONS),
         ]);
     }
 

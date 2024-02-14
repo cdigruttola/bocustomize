@@ -9,12 +9,12 @@ class ComposerStaticInit1ce66f59002e12622e51cc8f3adba8ee
     public static $prefixLengthsPsr4 = array (
         'c' => 
         array (
-            'cdigruttola\\Module\\Bocustomize\\' => 31,
+            'cdigruttola\\Bocustomize\\' => 24,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'cdigruttola\\Module\\Bocustomize\\' => 
+        'cdigruttola\\Bocustomize\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
@@ -23,6 +23,10 @@ class ComposerStaticInit1ce66f59002e12622e51cc8f3adba8ee
     public static $classMap = array (
         'Bocustomize' => __DIR__ . '/../..' . '/bocustomize.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'cdigruttola\\Bocustomize\\Controller\\BoCustomizeController' => __DIR__ . '/../..' . '/src/Controller/BoCustomizeController.php',
+        'cdigruttola\\Bocustomize\\Form\\BoCustomizeConfigurationType' => __DIR__ . '/../..' . '/src/Form/BoCustomizeConfigurationType.php',
+        'cdigruttola\\Bocustomize\\Form\\DataConfiguration\\BoCustomizeConfigurationData' => __DIR__ . '/../..' . '/src/Form/DataConfiguration/BoCustomizeConfigurationData.php',
+        'cdigruttola\\Bocustomize\\Form\\Provider\\BoCustomizerConfigurationFormDataProvider' => __DIR__ . '/../..' . '/src/Form/Provider/BoCustomizerConfigurationFormDataProvider.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
