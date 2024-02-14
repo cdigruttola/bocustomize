@@ -115,7 +115,9 @@ final class BoCustomizeConfigurationData implements DataConfigurationInterface
             $this->configuration->set(self::BOCUSTOMIZE_FILL_IMAGE_COLOR, $configuration['fill_image_color']);
 
             @file_put_contents(_PS_MODULE_DIR_ . $this->module->name . '/views/css/custom_logo.css', $configuration['custom_logo_css']);
-            $this->upload($configuration['custom_logo_file']);
+            if ($configuration['custom_logo_file']) {
+                $this->upload($configuration['custom_logo_file']);
+            }
         }
 
         return [];
