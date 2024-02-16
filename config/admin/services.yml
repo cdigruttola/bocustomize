@@ -22,7 +22,7 @@ services:
       - 'ConfigurationForm'
 
   cdigruttola.bocustomize.configuration.form_provider:
-    class: cdigruttola\Bocustomize\Form\Provider\BoCustomizerConfigurationFormDataProvider
+    class: cdigruttola\Bocustomize\Form\Provider\BoCustomizeConfigurationFormDataProvider
     arguments:
       - '@cdigruttola.bocustomize.configuration'
 

@@ -34,7 +34,7 @@ if (!defined('_PS_VERSION_')) {
 use PrestaShop\PrestaShop\Core\Configuration\DataConfigurationInterface;
 use PrestaShop\PrestaShop\Core\Form\FormDataProviderInterface;
 
-class BoCustomizerConfigurationFormDataProvider implements FormDataProviderInterface
+class BoCustomizeConfigurationFormDataProvider implements FormDataProviderInterface
 {
     /**
      * @var DataConfigurationInterface
