@@ -19,7 +19,7 @@ services:
       - '@prestashop.core.hook.dispatcher'
       - '@cdigruttola.bocustomize.configuration.form_provider'
       - 'cdigruttola\Bocustomize\Form\BoCustomizeConfigurationType'
-      - 'ConfigurationForm'
+      - 'BoCustomizeConfigurationForm'
 
   cdigruttola.bocustomize.configuration.form_provider:
     class: cdigruttola\Bocustomize\Form\Provider\BoCustomizeConfigurationFormDataProvider
