@@ -22,11 +22,14 @@
  * @copyright Copyright since 2007 Carmine Di Gruttola
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
+
 if (!defined('_PS_VERSION_')) {
     exit;
 }
 
 require_once _PS_MODULE_DIR_ . '/bocustomize/vendor/autoload.php';
+
+use cdigruttola\Bocustomize\Form\DataConfiguration\BoCustomizeConfigurationData;
 
 class ImageManager extends ImageManagerCore
 {
@@ -152,7 +155,7 @@ class ImageManager extends ImageManagerCore
         $targetHeight = $destinationHeight;
 
         $destImage = imagecreatetruecolor($destinationWidth, $destinationHeight);
-        $color = self::hex2rgb(Configuration::get(Bocustomize::BOCUSTOMIZE_FILL_IMAGE_COLOR));
+        $color = self::hex2rgb(Configuration::get(BoCustomizeConfigurationData::BOCUSTOMIZE_FILL_IMAGE_COLOR));
         // If the output is PNG, fill with transparency. Else fill with white background.
         if ($destinationFileType == 'png' || $destinationFileType == 'webp' || $destinationFileType == 'avif') {
             imagealphablending($destImage, false);
