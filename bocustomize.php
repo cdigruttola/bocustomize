@@ -113,6 +113,9 @@ class Bocustomize extends Module
             $params['controller']->addCSS($this->_path . 'views/css/custom_logo.css');
         }
         $params['controller']->addJs($this->_path . 'views/js/admin/login.js');
+        if (Module::isEnabled('ps_account')) {
+            $_GET['mode'] = 'local';
+        }
     }
 
     /**
