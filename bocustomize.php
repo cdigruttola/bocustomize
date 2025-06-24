@@ -44,7 +44,7 @@ class Bocustomize extends Module
     {
         $this->name = 'bocustomize';
         $this->tab = 'administration';
-        $this->version = '2.0.0';
+        $this->version = '3.0.0';
         $this->author = 'cdigruttola';
         $this->need_instance = 0;
         $this->bootstrap = true;
@@ -55,7 +55,7 @@ class Bocustomize extends Module
         $this->displayName = $this->trans('BackOffice customize', [], 'Modules.Bocustomize.Main');
         $this->description = $this->trans('This module helps you to customize BackOffice', [], 'Modules.Bocustomize.Main');
 
-        $this->ps_versions_compliancy = ['min' => '1.7.8', 'max' => _PS_VERSION_];
+        $this->ps_versions_compliancy = ['min' => '9.0.0', 'max' => _PS_VERSION_];
     }
 
     public function isUsingNewTranslationSystem(): bool
@@ -66,7 +66,7 @@ class Bocustomize extends Module
     public function install()
     {
         Configuration::updateValue(BoCustomizeConfigurationData::BOCUSTOMIZE_TITLE_TEXT, Configuration::get('PS_SHOP_NAME'));
-        Configuration::updateValue(BoCustomizeConfigurationData::BOCUSTOMIZE_COPYRIGHT_TEXT, '&copy; PrestaShop&#8482; 2007-' . date('Y') . ' - All rights reserved');
+        Configuration::updateValue(BoCustomizeConfigurationData::BOCUSTOMIZE_COPYRIGHT_TEXT, '© PrestaShop™ 2007-' . date('Y') . ' - All rights reserved');
         Configuration::updateValue(BoCustomizeConfigurationData::BOCUSTOMIZE_FILL_IMAGE_COLOR, '#FFF');
 
         return parent::install()

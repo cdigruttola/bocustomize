@@ -8,9 +8,19 @@ services:
   # Controller
   cdigruttola\Bocustomize\Controller\BoCustomizeController:
     public: true
+    autowire: true
+    autoconfigure: true
     class: cdigruttola\Bocustomize\Controller\BoCustomizeController
+
+  cdigruttola\Bocustomize\Controller\BoCustomizeLoginController:
+    autowire: true
+    autoconfigure: true
+    class: cdigruttola\Bocustomize\Controller\BoCustomizeLoginController
+    decorates: PrestaShopBundle\Controller\Admin\LoginController
     arguments:
-      - "@=service('prestashop.adapter.legacy.context').getLanguages(false)"
+      $projectDir: '%kernel.project_dir%'
+      $adminFolderName: '%prestashop.admin_folder_name%'
+      $configuration: '@prestashop.adapter.legacy.configuration'
 
   cdigruttola.bocustomize.form.configuration_type.form_handler:
     class: 'PrestaShop\PrestaShop\Core\Form\Handler'

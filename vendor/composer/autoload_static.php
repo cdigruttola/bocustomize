@@ -23,10 +23,6 @@ class ComposerStaticInit1ce66f59002e12622e51cc8f3adba8ee
     public static $classMap = array (
         'Bocustomize' => __DIR__ . '/../..' . '/bocustomize.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'cdigruttola\\Bocustomize\\Controller\\BoCustomizeController' => __DIR__ . '/../..' . '/src/Controller/BoCustomizeController.php',
-        'cdigruttola\\Bocustomize\\Form\\BoCustomizeConfigurationType' => __DIR__ . '/../..' . '/src/Form/BoCustomizeConfigurationType.php',
-        'cdigruttola\\Bocustomize\\Form\\DataConfiguration\\BoCustomizeConfigurationData' => __DIR__ . '/../..' . '/src/Form/DataConfiguration/BoCustomizeConfigurationData.php',
-        'cdigruttola\\Bocustomize\\Form\\Provider\\BoCustomizeConfigurationFormDataProvider' => __DIR__ . '/../..' . '/src/Form/Provider/BoCustomizeConfigurationFormDataProvider.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

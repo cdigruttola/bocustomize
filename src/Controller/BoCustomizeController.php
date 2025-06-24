@@ -31,27 +31,20 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
-use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
+use PrestaShop\PrestaShop\Core\Form\FormHandlerInterface;
+use PrestaShopBundle\Controller\Admin\PrestaShopAdminController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class BoCustomizeController extends FrameworkBundleAdminController
+class BoCustomizeController extends PrestaShopAdminController
 {
-    /**
-     * @var array
-     */
-    private $languages;
-
-    public function __construct($languages)
+    public function index(
+        #[Autowire(service: 'cdigruttola.bocustomize.form.configuration_type.form_handler')]
+        FormHandlerInterface $configurationFormHandler
+    ): Response
     {
-        parent::__construct();
-        $this->languages = $languages;
-    }
-
-    public function index(): Response
-    {
-
-        $configurationForm = $this->get('cdigruttola.bocustomize.form.configuration_type.form_handler')->getForm();
+        $configurationForm = $configurationFormHandler->getForm();
 
         return $this->render('@Modules/bocustomize/views/templates/admin/index.html.twig', [
             'form' => $configurationForm->createView(),
@@ -64,11 +57,13 @@ class BoCustomizeController extends FrameworkBundleAdminController
      *
      * @return Response
      */
-    public function saveConfiguration(Request $request): Response
+    public function saveConfiguration(Request $request, 
+                                      #[Autowire(service: 'cdigruttola.bocustomize.form.configuration_type.form_handler')] 
+                                      FormHandlerInterface $configurationFormHandler): Response
     {
         $redirectResponse = $this->redirectToRoute('bocustomize_controller');
 
-        $form = $this->get('cdigruttola.bocustomize.form.configuration_type.form_handler')->getForm();
+        $form = $configurationFormHandler->getForm();
         $form->handleRequest($request);
 
         if (!$form->isSubmitted()) {
@@ -77,10 +72,10 @@ class BoCustomizeController extends FrameworkBundleAdminController
 
         if ($form->isValid()) {
             $data = $form->getData();
-            $saveErrors = $this->get('cdigruttola.bocustomize.form.configuration_type.form_handler')->save($data);
+            $saveErrors = $configurationFormHandler->save($data);
 
             if (0 === count($saveErrors)) {
-                $this->addFlash('success', $this->trans('Successful update.', 'Admin.Notifications.Success'));
+                $this->addFlash('success', $this->trans('Successful update.', [], 'Admin.Notifications.Success'));
 
                 return $redirectResponse;
             }
@@ -92,7 +87,7 @@ class BoCustomizeController extends FrameworkBundleAdminController
             $formErrors[] = $error->getMessage();
         }
 
-        $this->flashErrors($formErrors);
+        $this->addFlashErrors($formErrors);
 
         return $redirectResponse;
     }
