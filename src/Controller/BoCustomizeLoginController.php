@@ -33,7 +33,6 @@ use PrestaShop\PrestaShop\Core\Context\ShopContext;
 use PrestaShopBundle\Controller\Admin\LoginController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Tools;
 
 if (!defined('_PS_VERSION_')) {
     exit;
@@ -41,7 +40,6 @@ if (!defined('_PS_VERSION_')) {
 
 class BoCustomizeLoginController extends LoginController
 {
-
     public function __construct(
         private readonly ShopContext $shopContext,
         private readonly string $projectDir,
@@ -58,13 +56,12 @@ class BoCustomizeLoginController extends LoginController
             'requestPasswordResetForm' => $requestPasswordResetForm->createView(),
             'showRequestPasswordResetForm' => $showRequestPasswordResetForm,
             'imgDir' => $this->shopContext->getBaseURI() . 'img/',
-            'shopName' => Tools::safeOutput($this->configuration->get(BoCustomizeConfigurationData::BOCUSTOMIZE_TITLE_TEXT, $this->getConfiguration()->get('PS_SHOP_NAME'))),
+            'shopName' => \Tools::safeOutput($this->configuration->get(BoCustomizeConfigurationData::BOCUSTOMIZE_TITLE_TEXT, $this->getConfiguration()->get('PS_SHOP_NAME'))),
             'copyright' => $this->configuration->get(BoCustomizeConfigurationData::BOCUSTOMIZE_COPYRIGHT_TEXT),
             'custom_logo' => $this->configuration->get(BoCustomizeConfigurationData::BOCUSTOMIZE_CUSTOM_LOGO),
             'ext' => $this->configuration->get(BoCustomizeConfigurationData::BOCUSTOMIZE_CUSTOM_LOGO_FILE_EXT),
             'module_dir' => __PS_BASE_URI__ . 'modules/bocustomize/',
             'social_icons' => $this->configuration->get(BoCustomizeConfigurationData::BOCUSTOMIZE_SOCIAL_ICONS),
-
         ]);
     }
 }

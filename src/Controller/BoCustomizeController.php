@@ -41,9 +41,8 @@ class BoCustomizeController extends PrestaShopAdminController
 {
     public function index(
         #[Autowire(service: 'cdigruttola.bocustomize.form.configuration_type.form_handler')]
-        FormHandlerInterface $configurationFormHandler
-    ): Response
-    {
+        FormHandlerInterface $configurationFormHandler,
+    ): Response {
         $configurationForm = $configurationFormHandler->getForm();
 
         return $this->render('@Modules/bocustomize/views/templates/admin/index.html.twig', [
@@ -52,15 +51,11 @@ class BoCustomizeController extends PrestaShopAdminController
         ]);
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function saveConfiguration(Request $request, 
-                                      #[Autowire(service: 'cdigruttola.bocustomize.form.configuration_type.form_handler')] 
-                                      FormHandlerInterface $configurationFormHandler): Response
-    {
+    public function saveConfiguration(
+        Request $request,
+        #[Autowire(service: 'cdigruttola.bocustomize.form.configuration_type.form_handler')]
+        FormHandlerInterface $configurationFormHandler,
+    ): Response {
         $redirectResponse = $this->redirectToRoute('bocustomize_controller');
 
         $form = $configurationFormHandler->getForm();
@@ -91,5 +86,4 @@ class BoCustomizeController extends PrestaShopAdminController
 
         return $redirectResponse;
     }
-
 }

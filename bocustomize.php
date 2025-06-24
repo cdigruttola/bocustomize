@@ -25,6 +25,7 @@
 
 use cdigruttola\Bocustomize\Form\DataConfiguration\BoCustomizeConfigurationData;
 use PrestaShop\PrestaShop\Adapter\SymfonyContainer;
+use PrestaShop\PrestaShop\Core\Addon\Module\ModuleManagerBuilder;
 
 if (!defined('_PS_VERSION_')) {
     exit;
@@ -36,7 +37,6 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
 
 class Bocustomize extends Module
 {
-
     private string $configurationSource;
     private array $fields;
 
@@ -104,7 +104,6 @@ class Bocustomize extends Module
     public function getContent()
     {
         Tools::redirectAdmin(SymfonyContainer::getInstance()->get('router')->generate('bocustomize_controller'));
-
     }
 
     public function hookActionAdminLoginControllerSetMedia($params)
@@ -113,32 +112,11 @@ class Bocustomize extends Module
             $params['controller']->addCSS($this->_path . 'views/css/custom_logo.css');
         }
         $params['controller']->addJs($this->_path . 'views/js/admin/login.js');
-        if (Module::isEnabled('ps_accounts')) {
+        $moduleManagerBuilder = ModuleManagerBuilder::getInstance();
+        $moduleManager = $moduleManagerBuilder->build();
+
+        if ($moduleManager->isEnabled('ps_accounts')) {
             $_GET['mode'] = 'local';
         }
-    }
-
-    /**
-     * Increases or decreases the brightness of a color by a percentage of the current brightness.
-     *
-     * @param string $hex_color Supported formats: `#FFF`, `#FFFFFF`, `FFF`, `FFFFFF`
-     * @param float $percent A number between -1 and 1. E.g. 0.3 = 30% lighter; -0.4 = 40% darker.
-     *
-     * @return string
-     */
-    private function luminance($hex_color, $percent): string
-    {
-        if (strlen($hex_color) < 6) {
-            $hex_color = $hex_color[0] . $hex_color[0] . $hex_color[1] . $hex_color[1] . $hex_color[2] . $hex_color[2];
-        }
-        $hex_color = array_map('hexdec', str_split(str_pad(str_replace('#', '', $hex_color), 6, '0'), 2));
-
-        foreach ($hex_color as $i => $color) {
-            $adjustableLimit = $percent < 0 ? $color : 255 - $color;
-            $adjustAmount = ceil($adjustableLimit * $percent);
-            $hex_color[$i] = str_pad(dechex($color + $adjustAmount), 2, '0', STR_PAD_LEFT);
-        }
-
-        return '#' . implode($hex_color);
     }
 }
